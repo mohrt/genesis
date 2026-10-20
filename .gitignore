@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.DS_Store
+
+# Cartridge images are never committed: free games and test files are downloaded by scripts.
+roms/
+*.gen
+*.smd
+*.bin
+public/games/
+tests/fixtures/m68000/
+tests/fixtures/zex/

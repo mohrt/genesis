@@ -1,0 +1,22 @@
+{
+  "name": "cursor-genesis",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "fetch:zex": "node scripts/fetch-zex.mjs",
+    "fetch:m68k": "node scripts/fetch-m68k-tests.mjs",
+    "fetch:games": "node scripts/fetch-games.mjs"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.5",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.4",
+    "vitest": "^5.0.5"
+  }
+}

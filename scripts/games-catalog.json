@@ -1,0 +1,38 @@
+{
+  "games": [
+    {
+      "title": "Alex vs Bus: The Race",
+      "file": "alex-vs-bus.md",
+      "url": "https://github.com/M374LX/alexvsbus-md/releases/download/pre3/alexvsbus-md-pre3.zip",
+      "sha256": "eea48b73298b7d38e69557cba291eaf05cf20f637d8faeaa032a53de2c562710",
+      "zipEntry": "alexvsbus-md-pre3/alexvsbus-pre3.md",
+      "credit": "M374LX",
+      "license": "GNU GPL v3, art CC BY-SA 4.0",
+      "licenseFile": "https://raw.githubusercontent.com/M374LX/alexvsbus-md/pre3/LICENSE.txt",
+      "sourceUrl": "https://github.com/M374LX/alexvsbus-md",
+      "hint": "A platform runner: get Alex to the bus before it leaves. Saves to its own save RAM."
+    },
+    {
+      "title": "KłełeAtoms MD",
+      "file": "kleleatoms.bin",
+      "url": "https://github.com/Nightwolf-47/KleleAtoms-MD/releases/download/v1.2.1/kleleatoms-md-121.bin",
+      "sha256": "d0660df5af9d39696272b0c6774f25f296ee38e86eacf8b52645eab3ea8b003a",
+      "credit": "Nightwolf-47",
+      "license": "MIT",
+      "licenseFile": "https://raw.githubusercontent.com/Nightwolf-47/KleleAtoms-MD/53f2344636c65b66ae0033e5345fa5502ebb0a21/LICENSE",
+      "sourceUrl": "https://github.com/Nightwolf-47/KleleAtoms-MD",
+      "hint": "Take the other players' atoms by blowing up yours; up to four players, or against the computer."
+    },
+    {
+      "title": "Minesweeper MD",
+      "file": "minesweeper.bin",
+      "url": "https://github.com/Nightwolf-47/Minesweeper-MD/releases/download/v1.1.1/minesweeper-md-111.bin",
+      "sha256": "8bef8734a3cbeaa9aa8988082e0afedfe3d67d530dd3b362861ead8ed3c52cf6",
+      "credit": "Nightwolf-47",
+      "license": "MIT",
+      "licenseFile": "https://raw.githubusercontent.com/Nightwolf-47/Minesweeper-MD/325e3d97d0b00d6d59c43a17c003c80d322f46ac/LICENSE",
+      "sourceUrl": "https://github.com/Nightwolf-47/Minesweeper-MD",
+      "hint": "Minesweeper with big grids: A uncovers, C flags, B chords, and Start goes back to the menu."
+    }
+  ]
+}

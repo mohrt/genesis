@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#111111" />
+    <title>Sega Genesis</title>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <main>
+      <div class="screen-frame">
+        <canvas id="screen" width="320" height="224" tabindex="0" aria-label="Sega Genesis screen"></canvas>
+        <p class="paused-label">Paused</p>
+        <p class="empty-label">Insert a cartridge to switch on</p>
+      </div>
+
+      <section id="toolbar" class="toolbar" aria-label="Console">
+        <span class="toolbar-group">
+          <button type="button" data-action="pause" title="P or the Pause key">Pause</button>
+          <button type="button" data-action="reset" title="The console's Reset button">Reset</button>
+          <button type="button" data-action="power" title="Switch the console off and on again">Power cycle</button>
+          <button type="button" data-action="fullscreen" title="Esc leaves full screen">Full screen</button>
+        </span>
+        <span class="toolbar-group">
+          <select name="region" aria-label="Region" title="Auto goes by the file name, then the regions the cartridge's header lists">
+            <option value="auto" selected>Region: Auto</option>
+            <option value="export">Export (USA, Europe)</option>
+            <option value="japan">Japan</option>
+          </select>
+          <select name="tv" aria-label="TV system" title="Auto picks PAL for European games">
+            <option value="auto" selected>TV: Auto</option>
+            <option value="ntsc">NTSC (60 Hz)</option>
+            <option value="pal">PAL (50 Hz)</option>
+          </select>
+          <select
+            name="pad"
+            aria-label="Controllers"
+            title="A few older games misread the six-button pad; give them the three-button one"
+          >
+            <option value="six" selected>6-button pads</option>
+            <option value="three">3-button pads</option>
+          </select>
+        </span>
+        <span class="toolbar-group">
+          <button type="button" data-action="save-state" title="Save the whole console, to come back to later">
+            Save state
+          </button>
+          <select name="state-slot" aria-label="Save states"></select>
+          <button type="button" data-action="load-state">Load</button>
+          <button type="button" data-action="delete-state">Delete</button>
+          <button type="button" data-action="export-state" title="Download the current state as a file">Export</button>
+          <button type="button" data-action="import-state">Import...</button>
+        </span>
+        <span class="toolbar-message" role="status"></span>
+        <input type="file" name="state-file" accept=".mdstate" hidden />
+      </section>
+
+      <section id="cart-panel" class="cart-panel" data-state="empty" aria-label="Cartridge slot">
+        <div class="cart-empty">
+          <p class="cart-title">Drop a .md, .bin, .gen, .smd or .zip cartridge image here</p>
+          <button type="button" data-action="choose">Choose file...</button>
+        </div>
+        <div class="cart-loaded">
+          <p class="cart-title"><span class="cart-name"></span> <span class="cart-file"></span></p>
+          <p class="cart-details"></p>
+          <div class="cart-actions">
+            <button type="button" data-action="choose">Change cartridge</button>
+            <button type="button" data-action="eject">Eject</button>
+            <span class="battery-actions" hidden>
+              <button type="button" data-action="export-save" title="The game's own save (its battery-backed RAM)">
+                Download .sav
+              </button>
+              <span class="battery-hint">or drop a .sav or .srm file to use one</span>
+            </span>
+          </div>
+        </div>
+        <p class="zip-files" hidden>In this zip: <span class="zip-buttons"></span></p>
+        <div class="bundled-games" hidden>
+          <p class="bundled-games-row">
+            Free games:
+            <select name="bundled-game" aria-label="Free games"></select>
+            <button type="button" data-action="play-game">Play</button>
+          </p>
+          <p class="game-info"></p>
+        </div>
+        <p class="bios-row">
+          <label
+            title="Start through the boot ROM of later consoles, as they do: it shows Sega's licence screen first"
+          >
+            <input type="checkbox" name="use-boot-rom" checked /> Start through the TMSS boot ROM
+          </label>
+          <span class="boot-rom-status">No boot ROM</span>
+          <button type="button" data-action="choose-boot-rom" title="Your own TMSS boot ROM image (2K); none is needed">
+            Add boot ROM...
+          </button>
+          <button type="button" data-action="forget-boot-rom" hidden>Forget</button>
+        </p>
+        <p class="cart-drop-hint">Release to insert</p>
+        <p class="cart-message" role="status"></p>
+        <input
+          type="file"
+          name="cart-file"
+          accept=".md,.bin,.gen,.smd,.68k,.sgd,.rom,.zip,.mdstate,.sav,.srm"
+          hidden
+        />
+        <input type="file" name="boot-rom-file" accept=".bin,.rom,.md,.zip" hidden />
+      </section>
+
+      <section id="controls" class="controls" aria-label="Controllers">
+        <div class="controls-row">
+          <label><input type="checkbox" name="show-pad" /> On-screen controller</label>
+          <label>
+            for
+            <select name="pad-player" aria-label="Which controller the on-screen controller presses">
+              <option value="0" selected>Player 1</option>
+              <option value="1">Player 2</option>
+            </select>
+          </label>
+          <label><input type="checkbox" name="sound" checked /> Sound</label>
+          <label>
+            Volume
+            <input type="range" name="volume" min="0" max="1" step="0.05" value="0.8" />
+          </label>
+          <span class="sound-hint" hidden>Click or press a key to start sound</span>
+        </div>
+        <div id="pad" class="pad" hidden>
+          <div class="pad-dpad" role="group" aria-label="D-pad"></div>
+          <div class="pad-middle">
+            <button type="button" data-button="Start">Start</button>
+          </div>
+          <div class="pad-face">
+            <div class="pad-face-row pad-face-small">
+              <button type="button" data-button="X">X</button>
+              <button type="button" data-button="Y">Y</button>
+              <button type="button" data-button="Z">Z</button>
+            </div>
+            <div class="pad-face-row">
+              <button type="button" data-button="A">A</button>
+              <button type="button" data-button="B">B</button>
+              <button type="button" data-button="C">C</button>
+            </div>
+          </div>
+        </div>
+        <p class="gamepad-status" aria-live="polite"></p>
+        <p class="controls-hint">
+          Keyboard (player 1): arrow keys for the D-pad, Z, X and C for A, B and C, A, S and D for X, Y and Z, Enter for
+          Start, and right Shift for Mode. Gamepads work as soon as you press a button; the first is player 1, the second
+          player 2. The left, bottom and right face buttons are A, B and C; the left shoulder, top face button and right
+          shoulder are X, Y and Z.
+        </p>
+      </section>
+
+      <p id="status">Starting...</p>
+      <nav class="emulator-links" aria-label="Emulators">
+        Emulators:
+        <a href="https://mohrt.github.io/sz81/">Timex Sinclair 1000</a>
+        <a href="https://mohrt.github.io/c64/">Commodore 64</a>
+        <a href="https://mohrt.github.io/atari2600/">Atari 2600</a>
+        <a href="https://mohrt.github.io/colecovision/">ColecoVision</a>
+        <a href="https://mohrt.github.io/nes/">NES</a>
+        <a href="https://mohrt.github.io/mastersystem/">Sega Master System</a>
+        <strong aria-current="page">Sega Genesis</strong>
+      </nav>
+      <footer class="site-links">
+        <a href="https://mohrt.com/">mohrt.com</a>
+        <a href="https://github.com/mohrt/genesis" target="_blank" rel="noopener">Source on GitHub</a>
+        <a href="https://x.com/mohrt" target="_blank" rel="noopener">@mohrt on X</a>
+      </footer>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
