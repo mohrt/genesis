@@ -24,7 +24,7 @@ Games that save to their cartridge (battery-backed RAM, as in Phantasy Star II) 
 
 ## The TMSS boot ROM
 
-Later Genesis consoles have a small boot ROM (TMSS) that shows "PRODUCED BY OR UNDER LICENSE FROM SEGA ENTERPRISES LTD." before the game. It is still under copyright, so none is included, and none is needed. If you have your own, **Add boot ROM...** (or drop a file with "tmss", "boot" or "bios" in its name) keeps it in the browser. With **Start through the TMSS boot ROM** ticked, the console starts in it as those consoles do. **Forget** removes it.
+Later Genesis consoles have a small boot ROM (TMSS) that shows "PRODUCED BY OR UNDER LICENSE FROM SEGA ENTERPRISES LTD." before the game. It is still under copyright, so none is included, and none is needed. If you have your own, the toolbar's **Boot ROM...** button shows the boot ROM setup in place of the screen (pausing the console): **Choose boot ROM file...**, or dropping a file onto the page while it is open, keeps it in the browser (so does dropping a file with "tmss", "boot" or "bios" in its name at any time). With **Start through the TMSS boot ROM** ticked, the console starts in it as those consoles do. **Forget** removes it, and **Back to the console** (or Esc) carries on.
 
 ## Cartridges
 

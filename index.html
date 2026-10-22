@@ -13,6 +13,42 @@
         <canvas id="screen" width="320" height="224" tabindex="0" aria-label="Sega Genesis screen"></canvas>
         <p class="paused-label">Paused</p>
         <p class="empty-label">Insert a cartridge to switch on</p>
+        <section id="boot-rom-setup" class="bios-setup" aria-labelledby="boot-rom-setup-title" hidden>
+          <h1 id="boot-rom-setup-title">TMSS boot ROM</h1>
+          <p class="bios-setup-lead">
+            None is needed: the Genesis starts games without one. Later Genesis consoles have this small boot ROM (TMSS),
+            which shows "PRODUCED BY OR UNDER LICENSE FROM SEGA ENTERPRISES LTD." before the game; with one, the console
+            starts in it as those consoles do. It is still under copyright, so none is included: choose or drop your own.
+            It stays in this browser and is never sent anywhere.
+          </p>
+          <div class="bios-rom optional" data-state="missing">
+            <p class="bios-rom-heading"><strong>TMSS boot ROM</strong> <span class="bios-need">Optional</span></p>
+            <p class="bios-rom-detail">The boot ROM of later consoles. Exactly 2K (2,048 bytes).</p>
+            <p class="bios-rom-names">
+              Often named <code>tmss.md</code>, <code>bios_MD.bin</code> or <code>GEN_boot.md</code>. The retrobios
+              collection keeps it as <code>tmss.md</code> in its
+              <a href="https://github.com/Abdess/retrobios/tree/main/bios/Sega/Mega%20Drive" target="_blank" rel="noopener"><code>Mega Drive</code></a>
+              folder.
+            </p>
+            <p class="bios-rom-status"></p>
+          </div>
+          <p class="bios-option">
+            <label
+              title="Start through the boot ROM of later consoles, as they do: it shows Sega's licence screen first"
+            >
+              <input type="checkbox" name="use-boot-rom" checked /> Start through the TMSS boot ROM
+            </label>
+          </p>
+          <div class="bios-actions">
+            <button type="button" class="primary" data-action="choose-boot-rom-file">Choose boot ROM file...</button>
+            <button type="button" data-action="forget-boot-rom" hidden>Forget</button>
+            <button type="button" data-action="back">Back to the console</button>
+          </div>
+          <p class="bios-setup-message" role="alert"></p>
+          <p class="bios-storage-note"></p>
+          <p class="bios-drop-hint">Release to load the boot ROM</p>
+          <input type="file" name="boot-rom-file" accept=".bin,.rom,.md,.zip" hidden />
+        </section>
       </div>
 
       <section id="toolbar" class="toolbar" aria-label="Console">
@@ -21,6 +57,9 @@
           <button type="button" data-action="reset" title="The console's Reset button">Reset</button>
           <button type="button" data-action="power" title="Switch the console off and on again">Power cycle</button>
           <button type="button" data-action="fullscreen" title="Esc leaves full screen">Full screen</button>
+          <button type="button" data-action="change-boot-rom" title="Add, check or forget the TMSS boot ROM; none is needed">
+            Boot ROM...
+          </button>
         </span>
         <span class="toolbar-group">
           <select name="region" aria-label="Region" title="Auto goes by the file name, then the regions the cartridge's header lists">
@@ -84,23 +123,6 @@
           </p>
           <p class="game-info"></p>
         </div>
-        <p class="bios-row">
-          <label
-            title="Start through the boot ROM of later consoles, as they do: it shows Sega's licence screen first"
-          >
-            <input type="checkbox" name="use-boot-rom" checked /> Start through the TMSS boot ROM
-          </label>
-          <span class="boot-rom-status">No boot ROM</span>
-          <button type="button" data-action="choose-boot-rom" title="Your own TMSS boot ROM image (2K); none is needed">
-            Add boot ROM...
-          </button>
-          <button type="button" data-action="forget-boot-rom" hidden>Forget</button>
-        </p>
-        <p class="bios-source">
-          The retrobios collection keeps it as <code>tmss.md</code> in its
-          <a href="https://github.com/Abdess/retrobios/tree/main/bios/Sega/Mega%20Drive" target="_blank" rel="noopener"><code>Mega Drive</code></a>
-          folder.
-        </p>
         <p class="cart-drop-hint">Release to insert</p>
         <p class="cart-message" role="status"></p>
         <input
@@ -109,7 +131,6 @@
           accept=".md,.bin,.gen,.smd,.68k,.sgd,.rom,.zip,.mdstate,.sav,.srm"
           hidden
         />
-        <input type="file" name="boot-rom-file" accept=".bin,.rom,.md,.zip" hidden />
       </section>
 
       <section id="controls" class="controls" aria-label="Controllers">

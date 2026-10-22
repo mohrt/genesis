@@ -14,9 +14,6 @@ export interface CartPanelCallbacks {
   onGame(index: number): Promise<File>;
   onEject(): void;
   onExportSave(): void;
-  /** A boot ROM image was chosen (or a zip with one in). */
-  onBootRomFile(file: File): Promise<void>;
-  onForgetBootRom(): Promise<void>;
   focusScreen(): void;
 }
 
@@ -69,16 +66,6 @@ export class CartPanel {
       this.callbacks.onExportSave();
       this.callbacks.focusScreen();
     });
-    const bootRomInput = requireChild<HTMLInputElement>(root, 'input[name="boot-rom-file"]');
-    requireChild<HTMLButtonElement>(root, '[data-action="choose-boot-rom"]').addEventListener('click', () => bootRomInput.click());
-    bootRomInput.addEventListener('change', () => {
-      const file = bootRomInput.files?.[0];
-      bootRomInput.value = '';
-      if (file) this.run(() => this.callbacks.onBootRomFile(file));
-    });
-    requireChild<HTMLButtonElement>(root, '[data-action="forget-boot-rom"]').addEventListener('click', () => {
-      if (confirm('Forget the boot ROM? Games will start straight away again.')) this.run(() => this.callbacks.onForgetBootRom());
-    });
     this.attachDragAndDrop();
   }
 
@@ -127,13 +114,6 @@ export class CartPanel {
     requireChild(this.root, '.cart-file').textContent = fileLabel === title ? '' : `(${fileLabel})`;
     requireChild(this.root, '.cart-details').textContent = details;
     requireChild<HTMLElement>(this.root, '.battery-actions').hidden = !hasBattery;
-  }
-
-  /** Shows whether a boot ROM is kept. */
-  showBootRom(kept: boolean): void {
-    requireChild(this.root, '.boot-rom-status').textContent = kept ? 'TMSS boot ROM kept' : 'No boot ROM: games start straight away';
-    requireChild<HTMLButtonElement>(this.root, '[data-action="forget-boot-rom"]').hidden = !kept;
-    requireChild<HTMLInputElement>(this.root, 'input[name="use-boot-rom"]').disabled = !kept;
   }
 
   /** Not every game's header says whether it saves, so the save buttons appear once the game uses its save RAM. */

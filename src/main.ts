@@ -11,6 +11,7 @@ import { BatterySaves, batteryKey } from './storage/battery-saves';
 import { BootRomStore, checkBootRom, looksLikeBootRom } from './storage/boot-rom-store';
 import { SaveStates, decodeSession, encodeSession, type SaveStateRecord, type Session } from './storage/save-states';
 import { memoryStores, openBrowserStores, type KeyValueStore } from './storage/store';
+import { BootRomSetup } from './ui/boot-rom-setup';
 import { CartPanel } from './ui/cart-panel';
 import { downloadFile } from './ui/download';
 import { Settings } from './ui/settings';
@@ -91,16 +92,22 @@ async function main(): Promise<void> {
 
     const stores = await openBrowserStores().catch((error: unknown) => {
       console.warn('Browser storage is unavailable; saves will last until the page is closed.', error);
+      requireElement<HTMLElement>('.bios-storage-note').textContent =
+        "This browser isn't letting the page store files, so the boot ROM will be forgotten when you close it.";
       return memoryStores();
     });
     const saveStates = new SaveStates(stores.saveStates as KeyValueStore<SaveStateRecord>);
     const batterySaves = new BatterySaves(stores.battery as KeyValueStore<Uint8Array>);
     const bootRomStore = new BootRomStore(stores.bootRom as KeyValueStore<Uint8Array>);
     let bootRom: Uint8Array | null = await bootRomStore.load().catch(() => null);
+    /** Only known for a boot ROM given since the page opened; the store keeps just the image. */
+    let bootRomName: string | null = null;
 
     let current: CurrentCartridge | null = null;
     let bundledGames: BundledGame[] = [];
     let paused = false;
+    /** While the boot ROM setup is shown in place of the screen. */
+    let choosingBootRom = false;
     const focusScreen = () => canvas.focus();
 
     const updateStatus = () => {
@@ -124,20 +131,31 @@ async function main(): Promise<void> {
     const useBootRom = requireElement<HTMLInputElement>('input[name="use-boot-rom"]');
     const applyBootRom = () => {
       machine.setBootRom(useBootRom.checked ? bootRom : null);
-      cartPanel.showBootRom(bootRom !== null);
+      bootRomSetup.showBootRom(bootRom !== null, bootRomName);
     };
     useBootRom.addEventListener('change', () => {
       applyBootRom();
       powerCycle();
       focusScreen();
     });
-    const useBootRomImage = async (bytes: Uint8Array) => {
+    const useBootRomImage = async (bytes: Uint8Array, fileName: string) => {
       const image = checkBootRom(bytes);
       await bootRomStore.save(image);
       bootRom = image;
+      bootRomName = fileName;
       useBootRom.checked = true;
       useBootRom.dispatchEvent(new Event('change'));
-      cartPanel.showMessage('TMSS boot ROM kept in this browser; the console was switched off and on to use it.', true);
+    };
+    /** Shows the boot ROM setup in place of the (paused) screen until the user goes back. */
+    const openBootRomSetup = async () => {
+      if (choosingBootRom) return;
+      choosingBootRom = true;
+      audio?.flush();
+      await bootRomSetup.open();
+      choosingBootRom = false;
+      emulator.resetTiming();
+      updateStatus();
+      focusScreen();
     };
 
     /** Sets the console up for the current cartridge and the toolbar's choices. */
@@ -250,7 +268,8 @@ async function main(): Promise<void> {
         else if (cartPanel.zipContents.includes(file)) cartPanel.setZipFiles(cartPanel.zipContents, file.name);
         else cartPanel.setZipFiles([], null);
         if (looksLikeBootRom(chosen.name)) {
-          await useBootRomImage(new Uint8Array(await chosen.arrayBuffer()));
+          await useBootRomImage(new Uint8Array(await chosen.arrayBuffer()), chosen.name);
+          cartPanel.showMessage('TMSS boot ROM kept in this browser; the console was switched off and on to use it.', true);
           return;
         }
         const media = await readMedia(chosen);
@@ -272,17 +291,24 @@ async function main(): Promise<void> {
         const data = current?.cartridge.saveData;
         if (current && data) downloadFile(data, `${slug(current.title)}${BATTERY_EXTENSION}`);
       },
-      onBootRomFile: async (file) => {
+      focusScreen,
+    });
+
+    const bootRomSetup = new BootRomSetup(requireElement('#boot-rom-setup'), {
+      onFile: async (file) => {
         const [chosen] = await filesFrom(file).catch(() => [file]);
-        await useBootRomImage(new Uint8Array(await chosen.arrayBuffer()));
+        await useBootRomImage(new Uint8Array(await chosen.arrayBuffer()), chosen.name);
       },
-      onForgetBootRom: async () => {
+      onForget: async () => {
         await bootRomStore.forget();
         bootRom = null;
+        bootRomName = null;
         applyBootRom();
         powerCycle();
       },
-      focusScreen,
+    });
+    requireElement<HTMLButtonElement>('#toolbar [data-action="change-boot-rom"]').addEventListener('click', () => {
+      void openBootRomSetup();
     });
 
     const refreshStates = async () => toolbar.setStates(await saveStates.list());
@@ -406,7 +432,7 @@ async function main(): Promise<void> {
       const elapsed = now - last;
       last = now;
       pollGamepads();
-      if (!paused) {
+      if (!paused && !choosingBootRom) {
         emulator.run(elapsed);
         audio?.play(emulator.takeAudioSamples());
       }
