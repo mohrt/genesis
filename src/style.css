@@ -167,12 +167,13 @@ body.choosing-boot-rom .controls {
 }
 
 .bios-rom-detail,
-.bios-rom-names {
+.bios-rom-names,
+.bios-tip {
   color: #aaa;
   font-size: 0.85rem;
 }
 
-.bios-rom-names a {
+.bios-tip a {
   color: var(--accent-soft);
 }
 
@@ -189,6 +190,10 @@ body.choosing-boot-rom .controls {
 
 .bios-rom[data-state='loaded'] .bios-rom-status {
   color: #9ad284;
+}
+
+.bios-option {
+  margin-bottom: 0.75rem !important;
 }
 
 .bios-option label {
