@@ -33,6 +33,118 @@
       "licenseFile": "https://raw.githubusercontent.com/Nightwolf-47/Minesweeper-MD/325e3d97d0b00d6d59c43a17c003c80d322f46ac/LICENSE",
       "sourceUrl": "https://github.com/Nightwolf-47/Minesweeper-MD",
       "hint": "Minesweeper with big grids: A uncovers, C flags, B chords, and Start goes back to the menu."
+    },
+    {
+      "title": "2048",
+      "file": "2048.bin",
+      "url": "https://raw.githubusercontent.com/atamurad/sega-2048/931008f890292afec936699821ed0d5de705b2df/out/rom.bin",
+      "sha256": "01b8970a6c997d492815cd39d96985c9dbefe020e6ca59872ffbde9b98e8e654",
+      "credit": "atamurad, after Gabriele Cirulli's 2048",
+      "license": "MIT",
+      "licenseFile": "https://raw.githubusercontent.com/atamurad/sega-2048/931008f890292afec936699821ed0d5de705b2df/LICENSE",
+      "sourceUrl": "https://github.com/atamurad/sega-2048",
+      "hint": "Slide the tiles with the D-pad to merge them. A starts a demo, B changes the colour and C the animation speed."
+    },
+    {
+      "title": "FIREBRAWL",
+      "file": "firebrawl.bin",
+      "url": "https://raw.githubusercontent.com/jerellsworth/FIREBRAWL/fb97490ad59ca4b7b3f3327468038c3e62c6e525/out/rom.bin",
+      "sha256": "08e09ba381b11e4f7ac966c439394e0d994c9f958050244a491146d01679d216",
+      "credit": "jerellsworth, with cleric art by Calciumtrice and sounds from Freesound (see ASSETS.md)",
+      "license": "Apache 2.0, cleric art CC BY 3.0",
+      "licenseFile": "https://raw.githubusercontent.com/jerellsworth/FIREBRAWL/fb97490ad59ca4b7b3f3327468038c3e62c6e525/LICENSE",
+      "sourceUrl": "https://github.com/jerellsworth/FIREBRAWL",
+      "hint": "A fireball duel: B throws (hold Up or Down to aim) and C jumps. A second player takes over the rival by pressing Start on pad 2."
+    },
+    {
+      "title": "Gnome Runner",
+      "file": "gnome-runner.bin",
+      "url": "https://github.com/SpectatorEx/Gnome-Runner/releases/download/1.0.1/Gnome_Runner.bin",
+      "sha256": "447ee0c1df094da693211c82252d882bf6bbd1ca2fbd908f8b12b87076ff00c3",
+      "credit": "Spectator & Yurakola",
+      "license": "GNU GPL v3",
+      "licenseFile": "https://raw.githubusercontent.com/SpectatorEx/Gnome-Runner/df60dafcd6353bace7532b236b7ed878d9ef7eb6/LICENSE",
+      "sourceUrl": "https://github.com/SpectatorEx/Gnome-Runner",
+      "hint": "An endless runner through the seasons: Start begins a run (and pauses it), then jump what comes at the gnome."
+    },
+    {
+      "title": "Lunch Break",
+      "file": "lunch-break.bin",
+      "url": "https://github.com/GoodPraxis/lunch-break/releases/download/v1.0/lunchbreak.zip",
+      "sha256": "d518ba49f9c577ab5e503cccb626dd22617ffff6342e0315d56888637ea198e3",
+      "zipEntry": "lunchbreak.bin",
+      "credit": "GoodPraxis",
+      "license": "GNU GPL v3",
+      "licenseFile": "https://raw.githubusercontent.com/GoodPraxis/lunch-break/cd9c5696f144a8ab6c9f7d8175392659f0ad1c57/LICENSE",
+      "sourceUrl": "https://github.com/GoodPraxis/lunch-break",
+      "hint": "Talk your fellow workers into joining the cause while staying away from the boss. Start begins; A, B or C jumps."
+    },
+    {
+      "title": "Tuxemon MD",
+      "file": "tuxemon-md.bin",
+      "url": "https://raw.githubusercontent.com/haroldo-ok/tuxemon-md/5a1e964587dc3a46c94003562b1cf494667ca52c/tuxemon-md.bin",
+      "sha256": "f50c164fa699682c83ba9037a45a9d13b93edb3556d6019be7a1204d7f57dbfe",
+      "credit": "haroldo-ok, from Tuxemon by the Tuxemon project",
+      "license": "GNU GPL v3",
+      "licenseFile": "https://raw.githubusercontent.com/haroldo-ok/tuxemon-md/5a1e964587dc3a46c94003562b1cf494667ca52c/LICENSE",
+      "sourceUrl": "https://github.com/haroldo-ok/tuxemon-md",
+      "hint": "Catch and battle monsters around Taba Town: A talks and confirms, C shows your party and Start saves. On the title screen A loads the save."
+    },
+    {
+      "title": "Violent Dragon Rabbit",
+      "file": "dragon-rabbit.bin",
+      "url": "https://github.com/JIoffe/DragonRabbit/releases/download/0.2.25/baolongtu.BIN",
+      "sha256": "c961783fcc794b25efcbaef9c6137bbff2deb875e5be9eb35959d2ed22303d18",
+      "credit": "JIoffe",
+      "license": "GNU GPL v3",
+      "licenseFile": "https://raw.githubusercontent.com/JIoffe/DragonRabbit/5ea892c5c00139834bb4bde8d06410cce3ae7f59/LICENSE",
+      "sourceUrl": "https://github.com/JIoffe/DragonRabbit",
+      "hint": "A one-level platformer prototype with a bonus stage: C jumps, A swings the katana and Start pauses."
+    },
+    {
+      "title": "The Spiral",
+      "file": "the-spiral.bin",
+      "url": "https://github.com/ResistanceVault/demo-The-Spiral/releases/download/Final/The_Spiral_by_Resistance_2019_final.zip",
+      "sha256": "2e27af65b5e23894897f61c208dba0ace2e49d285f1530c15cea0df09ee8d4b1",
+      "zipEntry": "The_Spiral_by_Resistance_2019_final_60Hz.bin",
+      "credit": "Resistance: code by GliGli, music by AceMan, graphics by Grass, GliGli and Optic",
+      "license": "GNU GPL v3",
+      "licenseFile": "https://raw.githubusercontent.com/ResistanceVault/demo-The-Spiral/d2befe3f52e976582b2986388e42d1b6a7bd9fef/LICENSE",
+      "sourceUrl": "https://github.com/ResistanceVault/demo-The-Spiral",
+      "hint": "A demo, not a game, released at the Evoke 2019 demo party: sit back, watch and listen."
+    },
+    {
+      "title": "Paper-io Demake",
+      "file": "paper-io.bin",
+      "url": "https://github.com/TomAwezome/paper-io-genesis/releases/download/1.0/paper-io.bin",
+      "sha256": "0b2e9d7045d3bf1f910c9a353e83bc6e7e1adf86fb52f28cbfd731cfb9173794",
+      "credit": "TomAwezome",
+      "license": "GNU GPL v3",
+      "licenseFile": "https://raw.githubusercontent.com/TomAwezome/paper-io-genesis/9efa83a5c32b5cacead14a939d59b741e8014705/LICENSE",
+      "sourceUrl": "https://github.com/TomAwezome/paper-io-genesis",
+      "hint": "Steer with the D-pad and loop back to your own colour to claim the ground you circled, before anyone crosses your trail."
+    },
+    {
+      "title": "Maid Shooter",
+      "file": "maid-shooter.bin",
+      "url": "https://github.com/masonou-vegas/maid-shooter-sega-megadrive-game/releases/download/1.0/Maid.Shooter.1.bin",
+      "sha256": "e17179e0538522c894f9f885ac01cf8ed5f4f51f2dd4f3c31c69cd1b550c92df",
+      "credit": "masonou-vegas",
+      "license": "MIT",
+      "licenseFile": "https://raw.githubusercontent.com/masonou-vegas/maid-shooter-sega-megadrive-game/709c79fda666a63e781840f88eb78bbbb7b91cb6/LICENSE",
+      "sourceUrl": "https://github.com/masonou-vegas/maid-shooter-sega-megadrive-game",
+      "hint": "A pseudo-3D rail shooter in the style of Panorama Cotton: three stages over Tokyo and Mount Fuji, each with a boss."
+    },
+    {
+      "title": "Parazitor",
+      "file": "parazitor.bin",
+      "url": "https://github.com/Rudloff/parazitor-megadrive/releases/download/0.1.1/rom.bin",
+      "sha256": "aa1188f65987ef53946246107873520e838eb2fafdeab6ac02664b5b1df98790",
+      "credit": "Rudloff",
+      "license": "GNU GPL v3",
+      "licenseFile": "https://raw.githubusercontent.com/Rudloff/parazitor-megadrive/22430a334df1f4cac6050e750a6659770af68636/LICENSE",
+      "sourceUrl": "https://github.com/Rudloff/parazitor-megadrive",
+      "hint": "A snake game: Start begins, and the D-pad steers the parasite."
     }
   ]
 }
