@@ -1,3 +1,4 @@
+import { trackGameLoaded } from './analytics';
 import { AudioOutput } from './audio/audio-output';
 import { Cartridge } from './cart/cartridge';
 import { detectRom, type Region, type RomInfo, type TvSystem } from './cart/detect';
@@ -284,6 +285,7 @@ async function main(): Promise<void> {
         }
         const game = bundledGames.find((entry) => entry.file.split('/').pop() === chosen.name);
         await insertImage(media.image, fromZip ? `${chosen.name} from ${file.name}` : chosen.name, game?.title);
+        trackGameLoaded('genesis', game?.title);
       },
       onGame: (index) => fetchGame(import.meta.env.BASE_URL, bundledGames[index]),
       onEject: eject,
